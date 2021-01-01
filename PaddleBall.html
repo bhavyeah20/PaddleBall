@@ -2,30 +2,30 @@
 <canvas id = "gameCanvas" width = "800" height = "600" > </canvas>
 
 <script>
-var canvas;
-var canvasContext;
-var ballX = 50;
-var ballSpeedX = 10;
-var ballY = 50;
-var ballSpeedY = 5;
-var paddle1Y = 250;
-var paddle2Y = 250;
+let canvas;
+let canvasContext;
+let ballX = 50;
+let ballSpeedX = 10;
+let ballY = 50;
+let ballSpeedY = 5;
+let paddle1Y = 250;
+let paddle2Y = 250;
 const PADDLE_HEIGHT = 100;
 const PADDLE_WIDTH = 10;
 
-var player1Score = 0;
-var player2Score = 0;
+let player1Score = 0;
+let player2Score = 0;
 
-var winScreen = false;
+let winScreen = false;
 const WINNING = 5;
 
 function calculateMousePos(evt) { //event
-	var rect = canvas.getBoundingClientRect();  //blackarea
-	var root = document.documentElement;	
-	var mouseX = evt.clientX - rect.left - root.scrollLeft;
+	let rect = canvas.getBoundingClientRect();  //blackarea
+	let root = document.documentElement;	
+	let mouseX = evt.clientX - rect.left - root.scrollLeft;
 	//returns mouse pos wrt blackbox and scroll
     //mouse pos accounted only when its within blackbox
-	var mouseY = evt.clientY - rect.top - root.scrollTop;
+	let mouseY = evt.clientY - rect.top - root.scrollTop;
 	return {
 		x:mouseX,
 		y:mouseY
@@ -45,7 +45,7 @@ function handleMouseClick(evt){
 window.onload = function() {
 	canvas = document.getElementById('gameCanvas');
 	canvasContext = canvas.getContext('2d');
-	var fps = 30;
+	let fps = 30;
 	setInterval(function(){
 		moveEverything();
 		drawEverything();
@@ -57,7 +57,7 @@ window.onload = function() {
 
 	canvas.addEventListener('mousemove',
 		function(evt) {
-			var mousePos = calculateMousePos(evt);
+			let mousePos = calculateMousePos(evt);
 			paddle1Y = mousePos.y - (PADDLE_HEIGHT/2);
 			//draw paddle before pos of mouse
 		});
@@ -99,7 +99,7 @@ function moveEverything() {
 		   ballY < paddle2Y + PADDLE_HEIGHT){
 			ballSpeedX = -ballSpeedX;
 
-			var deltaY = ballY - (paddle2Y+PADDLE_HEIGHT/2);
+			let deltaY = ballY - (paddle2Y+PADDLE_HEIGHT/2);
 			ballSpeedY = deltaY * 0.30 ;
 		} else {
 			player1Score++;
@@ -113,7 +113,7 @@ function moveEverything() {
 		   ballY < paddle1Y + PADDLE_HEIGHT){
 			ballSpeedX = -ballSpeedX;
 
-			var deltaY = ballY - (paddle1Y+PADDLE_HEIGHT/2);
+			let deltaY = ballY - (paddle1Y+PADDLE_HEIGHT/2);
 			ballSpeedY = deltaY * 0.30 ;
 			//introduces risk reward due to y deflection
 		} else {
@@ -134,7 +134,7 @@ function moveEverything() {
 }
 
 function drawNet() {
-	for(var i = 0;i<canvas.height;i+=40) {
+	for(let i = 0;i<canvas.height;i+=40) {
 		colorRect(canvas.width/2-1,i,2,20,'white');
 	}
 }
